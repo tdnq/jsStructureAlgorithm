@@ -26,10 +26,10 @@ doublyLinkList.prototype={
                 }
             }else if(index=this.count){
                 current = this.tail;
-                preious = 
+                // preious = 
                 current.next = node;
                 current.prev = node;
-                node.prev = 
+                // node.prev = 
 
             }else{
                 let current = this.head;
