@@ -3,14 +3,14 @@ function Node (element ){
     this.next = null;
     this.element = element;
 }
-function doublyLinkList (){
+function DoublyLinkList (){
     this.head = null;
     this.tail = null;
     this.count = 0;
 }
 
-doublyLinkList.prototype={
-    cunstuctor:doublyLinkList,
+DoublyLinkList.prototype={
+    cunstuctor:DoublyLinkList,
     insert: function(element,index){
         if(index<=this.count&&index>=0){
             const node =new Node(element);
@@ -24,28 +24,39 @@ doublyLinkList.prototype={
                     current.prev=node;
                     node.next=current;
                 }
-            }else if(index=this.count){
-                current = this.tail;
-                // preious = 
-                current.next = node;
-                current.prev = node;
-                // node.prev = 
-
             }else{
-                let current = this.head;
-                let preious;
+                let previous;
                 for(let i=0;i<index;i++){
-                    preious = current;
+                    previous = current;
                     current = current.next;
                 }
-                preious.next = node;
-                node.prev = preious;
-                node.next = current;
-                if(current){
-                    current.prev = node;
+                // 是否为链尾
+                if(current===null){
+                    previous.next = node;
+                    node.prev=previous;
+                    this.tail=node;
+                }else{
+                    node.prev = previous;
+                    node.next = previous.next;
+                    previous.next.prev = node;
+                    previous.next=node;
                 }
             }
             this.count++;
+            return this.head;
         }
+        return null;
+    },
+    getNodeAt(index){
+        if(index>=0&&index<this.count){
+            let current = this.head;
+            for(let i=0;i<index;i++){
+                current = current.next;
+            }
+            return current;
+        }
+        return null;
     }
 }
+
+module.exports = {DoublyLinkList,Node};

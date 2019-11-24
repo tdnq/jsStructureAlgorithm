@@ -83,3 +83,4 @@ LinkList.prototype = {
 }
 
 const linkList = new LinkList();
+module.exports = linkList;
